@@ -151,7 +151,7 @@ func main() {
 	opts = opts.SetOnConnectHandler(func(c mqtt.Client) {
 		c.Publish("mqworker/"+*identifier+"/available", 0, false, "true").Wait()
 		c.Subscribe("mqworker/"+*identifier+"/run/start", 0, func(c mqtt.Client, m mqtt.Message) {
-			run(c, string(m.Payload()))
+			run(c, *identifier, string(m.Payload()))
 		}).Wait()
 	})
 
@@ -166,4 +166,6 @@ func main() {
 			log.Println("Connection failed: ", token.Error())
 		}
 	}
+
+	select {}
 }

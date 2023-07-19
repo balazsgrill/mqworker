@@ -75,6 +75,8 @@ func (e *execution) runfile(filename string) {
 		return
 	}
 
+	e.log("Finished")
+	e.status("Success")
 }
 
 func (e *execution) getTempFile(url string) string {
